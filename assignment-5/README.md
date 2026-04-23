@@ -42,7 +42,7 @@ To implement a simple DAO (Decentralized Autonomous Organization) smart contract
 
 
 
-\### Execution
+\### Execution steps 
 
 
 
