@@ -1,26 +1,140 @@
-body{
-    font-family: Arial;
-    background: linear-gradient(135deg,#667eea,#764ba2);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container{
-    background:white;
-    padding:30px;
-    border-radius:10px;
-    text-align:center;
-    width:300px;
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0f0f0f;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e0e0e0;
 }
 
-button{
-    margin-top:10px;
-    padding:10px;
-    background:#f6851b;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+.card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.card:hover {
+    border-color: #3a3a3a;
+}
+
+.card label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 12px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 16px;
+    background: #0f0f0f;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+input:focus {
+    border-color: #4f46e5;
+}
+
+input::placeholder {
+    color: #555;
+}
+
+button {
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.connect-btn {
+    background: #4f46e5;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.connect-btn:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+}
+
+.primary {
+    background: #10b981;
+    color: #fff;
+}
+
+.primary:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.secondary {
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+
+.secondary:hover {
+    background: #3a3a3a;
+}
+
+.account {
+    font-size: 13px;
+    color: #10b981;
+    margin-top: 12px;
+    text-align: center;
+    word-break: break-all;
+}
+
+.output {
+    margin-top: 16px;
+    padding: 16px;
+    background: #0f0f0f;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #10b981;
+    min-height: 20px;
+}
+
+.btn-row {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-row button {
+    flex: 1;
 }

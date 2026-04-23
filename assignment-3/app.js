@@ -1,71 +1,90 @@
+// Global variables
 let provider;
 let signer;
 let contract;
 
-const contractAddress = "0x6be65D73119188fEacF7ad1bc159CEf40d186357";
+// 🔹 Replace with your deployed contract address (Sepolia)
+const contractAddress = "0x867957d763c1122f6f08b9c5a03567bf6f997e26";
 
+// 🔹 Minimal ABI (only required functions)
 const abi = [
-    "function set(uint256 _data)",
-    "function get() view returns (uint256)"
+    "function setMessage(string memory _newMessage)",
+    "function getMessage() view returns (string)"
 ];
 
-// CONNECT WALLET
+//  Connect Wallet
 async function connectWallet() {
-
-    if (!window.ethereum) {
-        alert("MetaMask not installed");
-        return;
-    }
-
     try {
-        const accounts = await window.ethereum.request({
-            method: "eth_requestAccounts"
-        });
+        if (!window.ethereum) {
+            alert("Please install MetaMask");
+            return;
+        }
 
-        provider = new ethers.BrowserProvider(window.ethereum);
-        signer = await provider.getSigner();
+        // Request account access
+        await window.ethereum.request({ method: "eth_requestAccounts" });
 
+        // Create provider & signer
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        signer = provider.getSigner();
+
+        // Create contract instance
         contract = new ethers.Contract(contractAddress, abi, signer);
 
-        const address = accounts[0];
+        // Get user address
+        const account = await signer.getAddress();
+        document.getElementById("account").innerText = "Connected: " + account;
 
-        document.getElementById("status").innerText =
-            "Connected: " + address;
+        console.log("Wallet connected:", account);
 
-        console.log("Connected:", address);
-
-    } catch (err) {
-        console.error(err);
+    } catch (error) {
+        console.error("Connection Error:", error);
     }
 }
 
+// Send Transaction (write to blockchain)
+async function sendTransaction() {
+    try {
+        if (!contract) {
+            alert("Please connect wallet first!");
+            return;
+        }
 
-// SET VALUE
-async function setData() {
+        const message = document.getElementById("messageInput").value;
 
-    const value = document.getElementById("inputValue").value;
+        if (!message) {
+            alert("Please enter product details");
+            return;
+        }
 
-    if (!value) {
-        alert("Enter value");
-        return;
+        console.log("Sending transaction...");
+
+        const tx = await contract.setMessage(message);
+        console.log("Transaction hash:", tx.hash);
+
+        await tx.wait();
+
+        alert("Transaction Successful");
+
+    } catch (error) {
+        console.error("Transaction Error:", error);
+        alert("Transaction Failed");
     }
-
-    const tx = await contract.set(value);
-    await tx.wait();
-
-    alert("Transaction Successful");
 }
 
-// GET VALUE
-async function getData() {
+//  Read data from blockchain
+async function getMessage() {
+    try {
+        if (!contract) {
+            alert("Please connect wallet first!");
+            return;
+        }
 
-    if (!contract) {
-        alert("Connect wallet first");
-        return;
+        const message = await contract.getMessage();
+        document.getElementById("output").innerText = "Stored: " + message;
+
+        console.log("Fetched message:", message);
+
+    } catch (error) {
+        console.error("Read Error:", error);
     }
-
-    const data = await contract.get();
-
-    document.getElementById("output").innerText =
-        "Stored Value: " + data.toString();
 }

@@ -1,26 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>IPFS Upload</title>
+    <title>IPFS Storage DApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<h2>Upload File to IPFS</h2>
+<div class="container">
 
-<input type="file" id="fileInput">
+    <div class="header">
+        <div class="logo">&#128193;</div>
+        <h1>Decentralized File Storage</h1>
+        <p class="subtitle">Upload and retrieve files using IPFS</p>
+        <button class="secondary" onclick="promptForCredentials()">Enter API Credentials</button>
+        <div id="credentials-status"></div>
+    </div>
 
-<button onclick="uploadFile()">Upload</button>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon upload-icon">&#8593;</div>
+            <h3>Upload File</h3>
+        </div>
+        
+        <div class="file-input-wrapper">
+            <input type="file" id="fileInput">
+            <label for="fileInput" class="file-label" id="fileLabel">
+                <span>&#128194;</span>
+                <span>Choose a file or drag it here</span>
+            </label>
+        </div>
+        
+        <button class="primary" onclick="uploadFile()">
+            <span>&#8593;</span> Upload to IPFS
+        </button>
 
-<p id="cidOutput"></p>
+        <div id="result" class="result"></div>
+    </div>
 
-<h3>Retrieve File</h3>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon retrieve-icon">&#8595;</div>
+            <h3>Retrieve File</h3>
+        </div>
+        
+        <input type="text" id="cidInput" class="text-input" placeholder="Enter CID here">
+        
+        <button class="secondary" onclick="getFile()">
+            <span>&#128269;</span> Fetch File
+        </button>
 
-<input type="text" id="cidInput" placeholder="Enter CID">
+        <iframe id="preview"></iframe>
+    </div>
 
-<button onclick="getFile()">Get File</button>
-
-<p id="link"></p>
+</div>
 
 <script src="app.js"></script>
 
