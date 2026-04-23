@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IPFS Upload</title>
+</head>
+
+<body>
+
+<h2>Upload File to IPFS</h2>
+
+<input type="file" id="fileInput">
+
+<button onclick="uploadFile()">Upload</button>
+
+<p id="cidOutput"></p>
+
+<h3>Retrieve File</h3>
+
+<input type="text" id="cidInput" placeholder="Enter CID">
+
+<button onclick="getFile()">Get File</button>
+
+<p id="link"></p>
+
+<script src="app.js"></script>
+
+</body>
+</html>
